@@ -1,0 +1,47 @@
+diff --git a/Makefile b/Makefile
+index 133a1ef..e726444 100644
+--- a/Makefile
++++ b/Makefile
+@@ -24,6 +24,8 @@ DOCDIR = $(DATAROOTDIR)/doc/$(CPROG)
+ SYSCONFDIR = $(PREFIX)/etc
+ HTMLDIR = $(DOCDIR)
+
++UNAME := $(shell uname)
++
+ # desired configuration of the document root
+ # never assume that the document_root actually
+ # exists on the build machine.  When building
+@@ -100,6 +102,13 @@ ifeq ($(TARGET_OS),LINUX)
+    CAN_INSTALL = 1
+ endif
+
++ifneq (, $(findstring MINGW32, $(UNAME)))
++   LIBS += -lws2_32 -lcomdlg32
++   SHARED_LIB=dll
++else
++   SHARED_LIB=so
++endif
++
+ all: build
+
+ help:
+@@ -174,7 +183,7 @@ endif
+
+ lib: lib$(CPROG).a
+
+-slib: lib$(CPROG).so
++slib: lib$(CPROG).$(SHARED_LIB)
+
+ clean:
+    rm -rf $(BUILD_DIR)
+@@ -191,6 +200,10 @@ lib$(CPROG).a: $(LIB_OBJECTS)
+ lib$(CPROG).so: CFLAGS += -fPIC
+ lib$(CPROG).so: $(LIB_OBJECTS)
+    $(LCC) -shared -o $@ $(CFLAGS) $(LDFLAGS) $(LIB_OBJECTS)
++   
++lib$(CPROG).dll: CFLAGS += -fPIC
++lib$(CPROG).dll: $(LIB_OBJECTS)
++   $(LCC) -shared -o $@ $(CFLAGS) $(LDFLAGS) $(LIB_OBJECTS) $(LIBS) -Wl,--out-implib,lib$(CPROG).dll.a
+
+ $(CPROG): $(BUILD_OBJECTS)
+    $(LCC) -o $@ $(CFLAGS) $(LDFLAGS) $(BUILD_OBJECTS) $(LIBS)

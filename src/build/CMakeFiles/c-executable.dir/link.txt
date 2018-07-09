@@ -1,0 +1,1 @@
+/usr/bin/gcc     CMakeFiles/c-executable.dir/main.o  -o civetweb  -L/mnt/host/civetweb-1.10/src/build -rdynamic libcivetweb.a -lpthread 

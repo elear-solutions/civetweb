@@ -1,0 +1,13 @@
+diff --git a/Makefile b/Makefile
+index e726444..0fb2848 100644
+--- a/Makefile
++++ b/Makefile
+@@ -191,7 +191,7 @@ clean:
+ distclean: clean
+    @rm -rf VS2012/Debug VS2012/*/Debug  VS2012/*/*/Debug
+    @rm -rf VS2012/Release VS2012/*/Release  VS2012/*/*/Release
+-   rm -f $(CPROG) lib$(CPROG).so lib$(CPROG).a *.dmg *.msi *.exe
++   rm -f $(CPROG) lib$(CPROG).so lib$(CPROG).a *.dmg *.msi *.exe lib$(CPROG).dll lib$(CPROG).dll.a
+
+ lib$(CPROG).a: $(LIB_OBJECTS)
+    @rm -f $@ 
