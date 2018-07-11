@@ -32,7 +32,7 @@ if ("${CIVETWEB_VERSION_MATCH}" STREQUAL "")
   message(FATAL_ERROR "Must specify a semantic version: major.minor.patch")
 endif()
 set(CIVETWEB_VERSION_MAJOR "${CMAKE_MATCH_1}")
-set(CIVETWEB_VERSION_MINOR "${CMAKE_MATCH_2}")
+set(C1IVETWEB_VERSION_MINOR "${CMAKE_MATCH_2}")
 set(CIVETWEB_VERSION_PATCH "${CMAKE_MATCH_3}")
 determine_target_architecture(CIVETWEB_ARCHITECTURE)
 
@@ -70,7 +70,7 @@ option(CIVETWEB_DISABLE_CGI "Disables CGI, so theserver will not execute CGI scr
 message(STATUS "Disable CGI support - ${CIVETWEB_DISABLE_CGI}")
 
 # Disable caching
-option(CIVETWEB_DISABLE_CACHING "Disables caching, so that no timegm is used." ON)
+option(CIVETWEB_DISABLE_CACHING "Disables caching, so that no timegm is used." OFF)
 message(STATUS "Disable caching support - ${CIVETWEB_DISABLE_CACHING}")
 
 # C++ wrappers
@@ -218,7 +218,7 @@ message(STATUS "Compile for OpenSSL 1.1 API - ${CIVETWEB_SSL_OPENSSL_API_1_1}")
 
 # Dynamically load or link the SSL libraries
 cmake_dependent_option(
-  CIVETWEB_ENABLE_SSL_DYNAMIC_LOADING "Dynamically loads the SSL library rather than linking it" OFF
+  CIVETWEB_ENABLE_SSL_DYNAMIC_LOADING "Dynamically loads the SSL library rather than linking it" ON
   CIVETWEB_ENABLE_SSL OFF)
 if (CIVETWEB_ENABLE_SSL)
   message(STATUS "Dynamically load SSL libraries - ${CIVETWEB_ENABLE_SSL_DYNAMIC_LOADING}")
@@ -401,6 +401,10 @@ if (CIVETWEB_ENABLE_CXX)
       "Flags used by the C++ compiler during coverage builds."
       FORCE)
   add_cxx_compiler_flag(--coverage COVERAGE)
+endif()
+
+if (INFO)
+	add_definitions(-DDEBUG)
 endif()
 
 # Set up the definitions

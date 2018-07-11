@@ -14202,7 +14202,7 @@ ssl_get_protocol(int version_id)
  * https://www.openssl.org/docs/man1.1.0/ssl/SSL_set_info_callback.html
  * https://linux.die.net/man/3/ssl_set_info_callback */
 static void
-ssl_info_callback(const SSL *ssl, int what, int ret)
+ssl_info_callback(SSL *ssl, int what, int ret)
 {
 	(void)ret;
 
