@@ -40,6 +40,19 @@ CivetWeb can be used by developers as a library, to add web server functionality
 It can also be used by end users as a stand-alone web server. It is available as single executable, no installation is required.
 
 
+Quick Setup
+-------------
+
+$ cd civetweb
+$ mkdir obj
+$ cd obj
+$ CC=gcc CMAKE_BUILD_TYPE=Release cmake ..
+                  (or)
+$ CC=gcc CMAKE_BUILD_TYPE=RelWithDebInfo cmake .. -DINFO=true (for printing debug info on screen)
+$ make
+$ sudo make install
+$ sudo ldconfig
+
 Where to find the official version?
 -----------------------------------
 
