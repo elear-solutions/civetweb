@@ -44,7 +44,7 @@ Quick Setup
 -------------
 
 It would be best to remove any previous installations manually if exist
-
+```
 $ cd civetweb
 $ mkdir obj
 $ cd obj
@@ -54,6 +54,7 @@ $ CC=gcc CMAKE_BUILD_TYPE=RelWithDebInfo cmake .. -DINFO=true (for printing debu
 $ make
 $ sudo make install
 $ sudo ldconfig
+```
 
 Where to find the official version?
 -----------------------------------
