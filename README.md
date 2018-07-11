@@ -43,6 +43,8 @@ It can also be used by end users as a stand-alone web server. It is available as
 Quick Setup
 -------------
 
+It would be best to remove any previous installations manually if exist
+
 $ cd civetweb
 $ mkdir obj
 $ cd obj
