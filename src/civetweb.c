@@ -13964,9 +13964,10 @@ load_dll(char *ebuf, size_t ebuf_len, const char *dll_name, struct ssl_func *sw)
 		            NULL, /* No truncation check for ebuf */
 		            ebuf,
 		            ebuf_len,
-		            "%s: cannot load %s",
+		            "%s: cannot load %s due to %s",
 		            __func__,
-		            dll_name);
+		            dll_name,
+		            dlerror());
 		return NULL;
 	}
 
