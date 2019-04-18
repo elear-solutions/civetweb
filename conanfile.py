@@ -1,6 +1,5 @@
 from conans import ConanFile, CMake, tools
 
-
 class CivetweblibConan(ConanFile):
     name = "civetweb"
     version = "0.1"
@@ -17,7 +16,7 @@ class CivetweblibConan(ConanFile):
     def build(self):
         cmake = CMake(self)
         if (self.settings.os == "Android"):
-            cmake.definitions["Platform"] = "android"
+            cmake.definitions[ "Platform" ] = "android"
         cmake.configure(source_folder=".")
         cmake.build()
 
@@ -25,9 +24,8 @@ class CivetweblibConan(ConanFile):
         #here src is directory path from where it should start checking for .h files and all mentioned in self.copy() 
         #it checks recursively by default
         self.copy("*.h", dst="include", src="include")
-        self.copy("*", dst="lib", src="lib", keep_path=False)
+        self.copy("*.a", dst="lib", src="lib", keep_path=False)
 
     def package_info(self):
         #self.cpp_info.libs name will be used to attach library in CMakelists.txt
-        self.cpp_info.libs = ["civetweb"]
-
+        self.cpp_info.libs = [ "civetweb" ]
