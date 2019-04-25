@@ -9,7 +9,7 @@ class CivetweblibConan(ConanFile):
     description = "This recipe file used to build and package binaries of civetweb repository"
     topics = ("<Put some tag here>", "<here>", "<and here>")
     settings = "os", "compiler", "build_type", "arch"
-    options = {"shared": [True, False]}
+    options = { "shared": [True, False] }
     default_options = "shared=False"
     generators = "cmake"
 
