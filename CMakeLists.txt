@@ -42,7 +42,6 @@ if(EXISTS ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
   conan_basic_setup()
 endif()
 
-
 # Detect the platform reliably
 if(NOT MACOSX AND ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
    SET(DARWIN YES)

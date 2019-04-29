@@ -9,14 +9,14 @@ class CivetweblibConan(ConanFile):
     description = "This recipe file used to build and package binaries of civetweb repository"
     topics = ("<Put some tag here>", "<here>", "<and here>")
     settings = "os", "compiler", "build_type", "arch"
-    options = { "shared": [True, False] }
+    options = { "shared": [ True, False ] }
     default_options = "shared=False"
     generators = "cmake"
 
     def build(self):
         cmake = CMake(self)
         if (self.settings.os == "Android"):
-            cmake.definitions[ "Platform" ] = "android"
+            cmake.definitions["Platform"] = "android"
         cmake.configure(source_folder=".")
         cmake.build()
 
