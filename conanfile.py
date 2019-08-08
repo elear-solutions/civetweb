@@ -32,3 +32,4 @@ class CivetweblibConan(ConanFile):
         self.cpp_info.libs = [ "civetweb_static" ]
 
 
+
