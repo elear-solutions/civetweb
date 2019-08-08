@@ -30,3 +30,4 @@ class CivetweblibConan(ConanFile):
         #self.cpp_info.libs name will be used to attach library in CMakelists.txt
         self.cpp_info.libs = [ "civetweb" ]
         self.cpp_info.libs = [ "civetweb_static" ]
+
