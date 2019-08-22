@@ -17250,6 +17250,8 @@ mg_get_system_info_impl(char *buffer, int buflen)
 #pragma GCC diagnostic push
 /* Disable bogus compiler warning -Wdate-time */
 #pragma GCC diagnostic ignored "-Wall"
+
+/* This fix is required in order to build for Android */
 #ifdef _clang_
 #if !defined(__has_warning) || __has_warning("-Werror")
 #pragma GCC diagnostic ignored "-Werror"
@@ -17257,6 +17259,7 @@ mg_get_system_info_impl(char *buffer, int buflen)
 #elif _GNUC_
 #pragma GCC diagnostic ignored "-Werror"
 #endif
+
 #endif
 		mg_snprintf(NULL,
 		            NULL,
