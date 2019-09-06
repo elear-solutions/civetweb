@@ -21,12 +21,12 @@ class CivetweblibConan(ConanFile):
         cmake.install()
 
     def package(self):
-        #here src is directory path from where it should start checking for .h files and all mentioned in self.copy() 
-        #it checks recursively by default
+        # here src is directory path from where it should start checking for .h files and all mentioned in self.copy() 
+        # it checks recursively by default
         self.copy("*.h", dst="include", src="package/include")
         self.copy("*", dst="lib", src="lib", keep_path=False)
 
     def package_info(self):
-        #self.cpp_info.libs name will be used to attach library in CMakelists.txt
+        # self.cpp_info.libs name will be used to attach library in CMakelists.txt
         self.cpp_info.libs = [ "civetweb" ]
         self.cpp_info.libs = [ "civetweb_static" ]
