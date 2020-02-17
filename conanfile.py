@@ -12,8 +12,6 @@ class CivetweblibConan(ConanFile):
     options = { "shared": [ True, False ] }
     default_options = { "shared": False }
     generators = "cmake"
-    default_user = "jenkins"
-    default_channel = "master"
 
     def build(self):
         cmake = CMake(self)
