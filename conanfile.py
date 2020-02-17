@@ -12,6 +12,8 @@ class CivetweblibConan(ConanFile):
     options = { "shared": [ True, False ] }
     default_options = { "shared": False }
     generators = "cmake"
+    default_user = "jenkins"
+    default_channel = "master"
 
     def build(self):
         cmake = CMake(self)
@@ -21,7 +23,7 @@ class CivetweblibConan(ConanFile):
         cmake.install()
 
     def package(self):
-        # here src is directory path from where it should start checking for .h files and all mentioned in self.copy() 
+        # here src is directory path from where it should start checking for .h files and all mentioned in self.copy()
         # it checks recursively by default
         self.copy("*.h", dst="include", src="package/include")
         self.copy("*", dst="lib", src="lib", keep_path=False)
