@@ -8,7 +8,7 @@
 | :--- | :--- | :--- |
 |**`ctx`**|`mg_context *`|The context in which to add the handlers|
 |**`uri`**|`const char *`|The URI for which the handlers should be activated|
-|**`connect_handler`**|`mg_websocket_connect_handler`|Handler called when a connect is signalled|
+|**`connect_handler`**|`mg_websocket_connect_handler`|Handler called when a connect is signaled|
 |**`ready_handler`**|`mg_websocket_ready_handler`|Handler called when the connection is ready|
 |**`data_handler`**|`mg_websocket_data_handler`|Handler called when data is received|
 |**`close_handler`**|`mg_websocket_close_handler`|Handler called when the connection closes|
@@ -25,6 +25,8 @@
 
 ### Description
 
-The function `mg_set_websocket_handler()` connects callback functions to a websocket URI. The callback functions are called when a state change is detected on the URI like an incomming connection or data received from a remote peer.
+The function `mg_set_websocket_handler()` connects callback functions to a websocket URI. The callback functions are called when a state change is detected on the URI like an incoming connection or data received from a remote peer.
 
 ### See Also
+
+* [`mg_set_websocket_handler_with_subprotocols();`](mg_set_websocket_handler_with_subprotocols.md)

@@ -36,7 +36,9 @@
 /*
 ** Lua 5.2
 */
+#ifndef lua_strlen
 #define lua_strlen lua_rawlen
+#endif
 /* luaL_typerror always used with arg at ndx == NULL */
 #define luaL_typerror(L,ndx,str) luaL_error(L,"bad argument %d (%s expected, got nil)",ndx,str)
 /* luaL_register used once, so below expansion is OK for this case */
@@ -1785,7 +1787,7 @@ static int db_exec_callback(void* user, int columns, char **data, char **names) 
         else
 #endif
         if (lua_isnumber(L, -1))
-            result = lua_tonumber(L, -1);
+            result = (int)lua_tonumber(L, -1);
     }
 
     lua_settop(L, top);
@@ -2373,6 +2375,12 @@ static void create_meta(lua_State *L, const char *name, const luaL_Reg *lib) {
     lua_pop(L, 1);
 }
 
+static int luaopen_sqlitelib (lua_State *L) {
+    luaL_newlibtable(L, sqlitelib);
+    luaL_setfuncs(L, sqlitelib, 0);
+    return 1;
+}
+
 LUALIB_API int luaopen_lsqlite3(lua_State *L) {
     create_meta(L, sqlite_meta, dblib);
     create_meta(L, sqlite_vm_meta, vmlib);
@@ -2382,8 +2390,8 @@ LUALIB_API int luaopen_lsqlite3(lua_State *L) {
     luaL_getmetatable(L, sqlite_ctx_meta);
     sqlite_ctx_meta_ref = luaL_ref(L, LUA_REGISTRYINDEX);
 
-    /* register (local) sqlite metatable */
-    luaL_register(L, "sqlite3", sqlitelib);
+    /* register global sqlite3 library */
+    luaL_requiref(L, "sqlite3", luaopen_sqlitelib, 1);
 
     {
         int i = 0;

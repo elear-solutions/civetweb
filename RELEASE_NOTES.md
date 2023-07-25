@@ -1,3 +1,201 @@
+Release Notes v1.17 (work in progress)
+===
+### Objectives: *to be defined*
+
+Changes
+-------
+
+- Update version number
+
+
+Release Notes v1.16
+===
+### Objectives: *bug fixes, documentation, WebDAV*
+
+Changes
+-------
+
+- Enable IPv6 as default when using CMake
+- Define error codes for mg_start2, mg_start_domain2, mg_connect_client2
+- Fixes for OpenSSL 3.0 support
+- Add support for Mbed TLS v3.0.0
+- WebDAV should understand Windows File Explorer (experimental)
+- Accept HTTP basic authentication
+- FreeBSD support, including CI and tests
+- Make pattern matching function availible in the public interface
+- Make base64 encoding and decoding functions available
+- Various fixes for HTTP/2 support
+- Additional examples
+- Fixes and updates to existing examples
+- Fix spelling errors in code and documentation
+- Remove Conan support
+- Update version number
+
+Note: A precompiled 32-bit executables for Windows is no longer provided, but only a 64 bit version.
+The source code itself still supports 32-bit platforms.
+
+Known Issues
+-----
+
+- The WebDAV support when using the Windows Explorer as client has various limitations when renaming or moving files and folders.
+- In particular file names in non-latin characters may break when using WebDAV with the Windows Explorer.
+
+
+Release Notes v1.15
+===
+### Objectives: *bug fixes, remove legacy interfaces*
+
+Changes
+-------
+
+- New configuration for URL decoding
+- Sanitize filenames in handle form
+- Example "embedded_c.c": Do not overwrite files (possible security issue) 
+- Remove obsolete examples
+- Remove "experimental" label for some features
+- Remove MG_LEGACY_INTERFACE that have been declared obsolete in 2017 or earlier
+- Modifications to build scripts, required due to changes in the test environment
+- Unix domain socket support fixed
+- Fixes for NO_SSL_DL
+- Fixes for some warnings / static code analysis
+- Update version number
+
+
+Release Notes v1.14
+===
+### Objectives: *mbedTLS, Lua API enhancements, log filtering*
+
+Changes
+-------
+
+- Change SSL default setting to use TLS 1.2 as minimum (set config if you need an earlier version)
+- Add local_uri_raw field (not sanitized URI) to request_info
+- Additional API functions and a callback after closing connections
+- Allow mbedTLS as OpenSSL alternative (basic functionality)
+- Add OpenSSL 3.0 support (OpenSSL 3.0 Alpha 13)
+- Support UNIX/Linux domain sockets
+- Fuzz tests and ossfuzz integration
+- Compression for websockets
+- Restructure some source files
+- Improve documentation
+- Fix HTTP range requests
+- Add some functions for Lua scripts/LSP
+- Build system specific fixes (CMake, MinGW)
+- Update 3rd party components (Lua, lfs, sqlite)
+- Allow Lua background script to use timers, format and filter logs
+- Remove WinCE code
+- Update version number
+
+
+Release Notes v1.13
+===
+### Objectives: *Various updates and fixes, additional API functions*
+
+Changes
+-------
+
+- Add arguments for CGI interpreters
+- Support multiple CGi interpreters
+- Buffering HTTP response headers, including API functions mg_response_header_* in C and Lua
+- Additional C API functions
+- Fix some memory leaks
+- Extended use of atomic operations (e.g., for server stats)
+- Add fuzz tests
+- Set OpenSSL 1.1 API as default (from 1.0)
+- Add Lua 5.4 support and deprecate Lua 5.1
+- Provide additional Lua API functions
+- Fix Lua websocket memory leak when closing the server
+- Remove obsolete "file in memory" implementation
+- Improvements and fixes in documentation
+- Fixes from static source code analysis
+- Additional unit tests
+- Various small bug fixes
+- Experimental support for some HTTP2 features (not ready for production)
+- Experimental support for websocket compression
+- Remove legacy interfaces declared obsolete since more than 3 years
+- Update version number
+
+
+Release Notes v1.12
+===
+### Objectives: *Multiple improvements and extensions in various areas, including compatibility, Lua scripting, documentation*
+
+Changes
+-------
+
+- Updates/improvements for LuaXML
+- Updates and tests for JSON for Lua
+- BoringSSL support
+- Add Remark: Do not use Git for Windows V2.24 (but <= V2.23 or >= V2.25)
+- Format configuration dialogs for Windows
+- Add option "hide_tray" to start without Windows systray icon
+- URI checking according to "remove_dot_segments" algorithm from RFC
+- Experimental support for a new server and client start API
+- Additional callbacks to initialize external SSL context
+- More cache control options for static files
+- Trace function for Lua server pages
+- Access to client certificate data for Lua pages
+- Allow to configure SOMAXCONN (max. number of waiting connections)
+- Include some build options for Zephyr
+- Support for flawed CGI interpreters returning only <LF> instead of <CR><LF>
+- Add NO_FILESYSTEM flag for (embedded) system without any file system
+- Several fixes for server side Lua scripts
+- Disable SSL renegotiation for new OpenSSL version
+- Allow to force TLSv1.3 (disable TLSv1.2)
+- Prefer pre-compressed *.gz file, if it already exists
+- Fix some #include statements for various compilers / OS / SDK versions
+- Support for Linux Standard Base (LSB)
+- Fixes to mg_get_*_info() API functions
+- Fix some bugs/deficiencies in examples and tests
+- Fix some static source code analysis warnings
+- Add Conan package build
+- Fix include for Lua pages in "Kepler Syntax"
+- Replace some uses of deprecated Linux and OpenSSL API functions
+- Improved documentation and examples
+- Fixes for timeout handling
+- Fixes for the request queue (rare loss of requests)
+- Client side SNI
+- Update version number
+
+
+Release Notes v1.11
+===
+### Objectives: *Support multiple domains and certificates, support websocket ping-pong, on-the-fly compression, additional API functions*
+
+Changes
+-------
+
+- Add API function to send file body for C and Lua
+- Fix several warnings from different compilers and static code analyzers
+- Drop Symbian support from the code
+- Improve examples
+- Timeout for CGI scripts
+- Fix for requests using IPv6 addresses as hostname
+- Shared data for Lua scripts and Lua server pages
+- Add API function for 30x redirect
+- Script for Linux bash auto-completion
+- Add HTTP JSON C callback example
+- Add helper function for HTTP 200 OK response
+- Allow Kepler Syntax for Lua Server pages
+- Update duktape to 2.2.0 and Lua to 5.3.4
+- Optional support for on-the-fly compression (if zlib is available and USE_ZLIB is set)
+- Add method to replace mg\_cry and log\_access by own implementation
+- Fixes for IPv6 support
+- Add server support for websocket ping pong protocol
+- Fix misspellings in source code and documentation
+- Add error msg to http_error callback
+- Move unit test to a new directory
+- Remove remote\_ip request\_info member (it has been legacy since several versions)
+- Use gmtime_r instead of gmtime, if available
+- Add some functions to C++ wrapper
+- Support multiple domains with different certificate files (TLS server name identification, SNI)
+- Provide client peer certificate (X509) in mg\_client\_cert structure
+- Add new callback (get\_external\_ssl\_ctx) to provide pre-initialized TLS context
+- Improve unit tests
+- Fix ssl init for HTTPS clients
+- Update version number
+
+
 Release Notes v1.10
 ===
 ### Objectives: *OpenSSL 1.1 support, add server statistics and diagnostic data*
@@ -35,7 +233,7 @@ Changes
 - Support for multipart requests without quotes (for some C# clients)
 - Initialize SSL in mg\_init\_library, so https client functions can be used when no server is running
 - Allow "REPORT" HTTP method for REST calls to scripts
-- Allow to compile civetweb.c wih a C++ compiler
+- Allow to compile civetweb.c with a C++ compiler
 - Lua: Remove internal length limits of encode/decode functions
 - Allow sub-resources of index script files
 - Add config parameter allow\_index\_script\_resource the aforementioned feature
@@ -103,6 +301,7 @@ Changes
 - Fix bug in timer logic (for Lua Websockets)
 - Updated version number
 
+
 Release Notes v1.8
 ===
 ### Objectives: *CMake integration and continuous integration tests, Support client certificates, bug fixes*
@@ -151,6 +350,7 @@ Changes
 - Add status badges to the GitHub project main page
 - Updated version number
 
+
 Release Notes v1.7
 ===
 ### Objectives: *Examples, documentation, additional API functions, some functions rewritten, bug fixes and updates*
@@ -198,6 +398,7 @@ Changes
 - Fix compiler warnings
 - Updated version number
 
+
 Release Notes v1.6
 ===
 ### Objectives: *Enhance Lua support, configuration dialog for windows, new examples, bug fixes and updates*
@@ -241,6 +442,7 @@ Changes
 - Fixed Posix locking functions for Windows (bel2125)
 - Updated version number
 
+
 Release Notes v1.5
 ===
 ### Objectives: *Bug fixes and updates, repository restoration*
@@ -249,7 +451,7 @@ Changes
 -------
 
 - Corrected bad mask flag/opcode passing to websocket callback (William Greathouse)
-- Moved CEVITWEB_VERSION define into civetweb.h
+- Moved CIVETWEB_VERSION define into civetweb.h
 - Added new simple zip deployment build for Windows.
 - Removed windows install package build.
 - Fixes page violation in mod_lua.inl (apkbox)
@@ -273,6 +475,7 @@ Changes
 - Travis automated build testing support added (Daniel Oaks)
 - Updated version numbers.
 - Added contributor credits file.
+
 
 Release Notes v1.4
 ===
@@ -299,6 +502,7 @@ Changes
 - Conformed source files to UNIX line endings for consistency.
 - Unified the coding style to improve reability.
 
+
 Release Notes v1.3
 ===
 ### Objectives: *Buildroot Integration*
@@ -310,6 +514,7 @@ Changes
 - Validated build without SQLITE3 large file support
 - Updated documentation
 - Updated Buildroot config example
+
 
 Release Notes v1.2
 ===
@@ -335,6 +540,7 @@ Known Issues
 
 - The prebuilt Window's version requires [Visual C++ Redistributable for Visual Studio 2012](http://www.microsoft.com/en-us/download/details.aspx?id=30679)
 
+
 Release Notes v1.1
 ===
 ### Objectives: *Build, Documentation, License Improvements*
@@ -351,7 +557,7 @@ Changes
 - Added new C++ abstraction class CivetServer
 - Added thread safety for and fixed websocket defects (Morgan McGuire)
 - Created PKGBUILD to use Arch distribution (Daniel Oaks)
-- Created new documentation on Embeddeding, Building and yaSSL (see docs/).
+- Created new documentation on Embedding, Building and yaSSL (see docs/).
 - Updated License file to include all licenses.
 - Replaced MD5 implementation due to questionable license.
      + This requires new source file md5.inl
@@ -374,10 +580,11 @@ Known Issues
 - Build support for VS6 and some other has been deprecated.
     + This does not impact embedded programs, just the stand-alone build.
     + The old Makefile was renamed to Makefile.deprecated.
-    + This is partcially do to lack fo testing.
+    + This is partcially do to lack of testing.
     + Need to find out what is actually in demand.
 - Build changes may impact current users.
     + As with any change of this type, changes may impact some users.
+
 
 Release Notes v1.0
 ===
@@ -390,6 +597,6 @@ Changes
 
 - Renamed Mongoose to Civetweb in the code and documentation.
 - Replaced copyrighted images with new images
-- Created a new code respository at https://github.com/civetweb/civetweb
+- Created a new code repository at https://github.com/civetweb/civetweb
 - Created a distribution site at https://sourceforge.net/projects/civetweb/
 - Basic build testing
