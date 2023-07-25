@@ -1,8 +1,0 @@
-/mnt/host/civetweb-1.10/src/build/CMakeFiles/install.dir
-/mnt/host/civetweb-1.10/src/build/CMakeFiles/list_install_components.dir
-/mnt/host/civetweb-1.10/src/build/CMakeFiles/rebuild_cache.dir
-/mnt/host/civetweb-1.10/src/build/CMakeFiles/c-library.dir
-/mnt/host/civetweb-1.10/src/build/CMakeFiles/edit_cache.dir
-/mnt/host/civetweb-1.10/src/build/CMakeFiles/c-executable.dir
-/mnt/host/civetweb-1.10/src/build/CMakeFiles/install/strip.dir
-/mnt/host/civetweb-1.10/src/build/CMakeFiles/install/local.dir

@@ -14,7 +14,7 @@
 ### Return Value
 
 | Type | Description |
-| :--- | :--- |
+|`int`| An integer indicating success (>=0) or failure (<0) |
 
 
 ### Description
@@ -27,6 +27,6 @@ A body of the error message, to explain the error in more detail, can be specifi
 
 ### See Also
 
-* [`mg_printf();`](mg_printf.md)
-* [`mg_write();`](mg_write.md)
+* [`mg_send_http_ok();`](mg_send_http_ok.md)
+* [`mg_send_http_redirect();`](mg_send_http_redirect.md)
 

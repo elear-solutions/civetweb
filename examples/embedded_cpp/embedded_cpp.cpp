@@ -1,4 +1,4 @@
-/* Copyright (c) 2013-2017 the Civetweb developers
+/* Copyright (c) 2013-2018 the Civetweb developers
  * Copyright (c) 2013 No Face Press, LLC
  * License http://opensource.org/licenses/mit-license.php MIT License
  */
@@ -18,7 +18,11 @@
 #define PORT "8081"
 #define EXAMPLE_URI "/example"
 #define EXIT_URI "/exit"
-bool exitNow = false;
+
+
+/* Exit flag for main loop */
+volatile bool exitNow = false;
+
 
 class ExampleHandler : public CivetHandler
 {
@@ -36,8 +40,15 @@ class ExampleHandler : public CivetHandler
 		          "<p>To see a page from the A handler <a "
 		          "href=\"a\">click here</a></p>\r\n");
 		mg_printf(conn,
-		          "<p>To see a page from the A handler with a parameter "
-		          "<a href=\"a?param=1\">click here</a></p>\r\n");
+                  "<form action=\"a\" method=\"get\">"
+                  "To see a page from the A handler with a parameter "
+                  "<input type=\"submit\" value=\"click here\" "
+                  "name=\"param\" \\> (GET)</form>\r\n");
+        mg_printf(conn,
+                  "<form action=\"a\" method=\"post\">"
+                  "To see a page from the A handler with a parameter "
+                  "<input type=\"submit\" value=\"click here\" "
+                  "name=\"param\" \\> (POST)</form>\r\n");
 		mg_printf(conn,
 		          "<p>To see a page from the A/B handler <a "
 		          "href=\"a/b\">click here</a></p>\r\n");
@@ -342,7 +353,7 @@ class WebSocketHandler : public CivetWebSocketHandler {
 		printf("WS ready\n");
 
 		const char *text = "Hello from the websocket ready handler";
-		mg_websocket_write(conn, WEBSOCKET_OPCODE_TEXT, text, strlen(text));
+		mg_websocket_write(conn, MG_WEBSOCKET_OPCODE_TEXT, text, strlen(text));
 	}
 
 	virtual bool handleData(CivetServer *server,
@@ -354,7 +365,7 @@ class WebSocketHandler : public CivetWebSocketHandler {
 		fwrite(data, 1, data_len, stdout);
 		printf("\n");
 
-		mg_websocket_write(conn, WEBSOCKET_OPCODE_TEXT, data, data_len);
+		mg_websocket_write(conn, MG_WEBSOCKET_OPCODE_TEXT, data, data_len);
 		return (data_len<4);
 	}
 
@@ -369,6 +380,8 @@ class WebSocketHandler : public CivetWebSocketHandler {
 int
 main(int argc, char *argv[])
 {
+	mg_init_library(0);
+	
 	const char *options[] = {
 	    "document_root", DOCUMENT_ROOT, "listening_ports", PORT, 0};
     
@@ -427,6 +440,7 @@ main(int argc, char *argv[])
 	}
 
 	printf("Bye!\n");
+	mg_exit_library();
 
 	return 0;
 }
